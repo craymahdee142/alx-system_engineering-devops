@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# Bash script that stops using kill or killall
+
+pkill "bash ./7-highlander" -f
