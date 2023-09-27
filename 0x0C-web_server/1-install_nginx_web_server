@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+# install nginx server
+
+# update package info 
+apt-get update
+
+# install Nginx
+apt-get -y install nginx
+
+# allow incming HTTP traffic through firewall
+ufw allow 'Nginx HTTP'
+
+# sample text msg to defaulf Nginx page
+echo "Hello.world!" > /var/www/html/index.html
+
+# start nginx service
+service nginx start
