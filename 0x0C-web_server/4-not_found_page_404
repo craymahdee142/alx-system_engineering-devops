@@ -18,7 +18,7 @@ echo "server {
     root /var/www/html;
     index index.html;
     
-    location / {
+    location / rediect_me {
         return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;
     }
     error_page 404 /404.html;
@@ -29,4 +29,4 @@ echo "server {
 
 # custom server configuration
 sudo mv -f default /etc/nginx/sites-available/default
-sudo service retart
+sudo service nginx retart

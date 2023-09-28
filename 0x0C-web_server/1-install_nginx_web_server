@@ -2,16 +2,16 @@
 # install nginx server
 
 # update package info 
-sudo apt-get update
+apt-get update
 
 # install Nginx
-sudo apt-get -y install nginx
+apt-get -y install nginx
 
 # allow incming HTTP traffic through firewall
-sudo ufw allow 'Nginx HTTP'
+ufw allow 'Nginx HTTP'
 
 # sample text msg to defaulf Nginx page
-echo "Hello world!" > /var/www/html/index.nginx-debian.html > /dev/null
+echo "Hello world!" > /var/www/html/index.nginx-debian.html
 
 # start nginx service
 service nginx start

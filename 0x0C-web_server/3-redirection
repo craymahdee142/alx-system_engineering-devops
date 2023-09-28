@@ -1,17 +1,18 @@
 #!/usr/bin/env bash
 
 # update information and install nginx and star server
-sudo apt-get update
-sudo apt-get -y install nginx
-sudo ufw allow 'Nginx HTTP'
-mkdir -p /var/www/html
+apt-get update
+apt-get -y install nginx
+ufw allow 'Nginx HTTP'
+mkdir -p /var/www/html/
 
 # set permission for web content
 sudo chmod -R 755 /var/www
 
-echo "Hello world!" | sudo tee /var/www/html/index.html > /dev/null
+echo "Hello world!" > /var/www/html/index.html
 
-SERVER_CONFIG="server {
+SERVER_CONFIG=\
+"server {
     listen 80 default_server;
     listen [::]:80 default_server;
     root /var/www/html;
@@ -26,7 +27,7 @@ SERVER_CONFIG="server {
 }"
 
 # custom server configuration
-echo "$SERVER_CONFIG" | sudo tee /etc/nginx/sites-available/my_custome_site /etc/nginx/sites-enabled/
+echo -c "echo -e '$SERVER_CONFIG' > /etc/nginx/sites-enabled/default"
 
 # check for nginx start and restart
 if [ "$(pgrep -c nginx)" -le 0 ]; then
