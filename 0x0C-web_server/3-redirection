@@ -1,37 +1,9 @@
 #!/usr/bin/env bash
 
-# update information and install nginx and star server
-apt-get update
-apt-get -y install nginx
-ufw allow 'Nginx HTTP'
-mkdir -p /var/www/html/
-
-# set permission for web content
-sudo chmod -R 755 /var/www
-
-echo "Hello world!" > /var/www/html/index.html
-
-SERVER_CONFIG=\
-"server {
-    listen 80 default_server;
-    listen [::]:80 default_server;
-    root /var/www/html;
-    index index.html index.htm index.nginx-debian.html;
-    server_name_;
-    location / {
-        try_files \$uri \$uri/ =404;
-    }
-    if (\$request_filename ~ redirect_me) {
-        rewrite ^ https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;
-    }
-}"
-
-# custom server configuration
-echo -c "echo -e '$SERVER_CONFIG' > /etc/nginx/sites-enabled/default"
-
-# check for nginx start and restart
-if [ "$(pgrep -c nginx)" -le 0 ]; then
-    service nginx start
-else
-    service nginx restart
-fi
+#config  a new Nginx server to /redirect_me
+sudo apt-get -y  update
+sudo apt-get -y install nginx
+sudo ufw allow 'Nginx HTTP'
+echo "Hello world!" | sudo tee /var/www/html/index
+sudo sed -i 'listen 80 default_server/a rewrite ^/rewrite  https://www.youtube.com/watch?v=QH2-TGUlwu4/ permanent;' /etc/nginx/sites-availble/default 
+service nginx restart
