@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+#Install and cofigure HAProxy on lb-01 to send traic to web-01 and web-02
+apt-get install -y software-properties-common
+add-apt-repository -y ppa:vbernat/haproxy-1.8
+apt-get -y update
+apt-get install -y haproxy
+
+echo "ENABLED=1" > /etc/default/haproxy
+
+echo "
+   listen load_balancer
+   bind *:80
+   mode http
+   balance roundrobin
+   option httpclose
+   option forwardfor
+   server 63210-web-01 54.210.48.100 check 
+   server 63210-web-02 54.210.47.110 check
+ " >> /etc/haproxy.cfg
+
+service haproxy start
