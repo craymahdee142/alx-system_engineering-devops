@@ -9,8 +9,8 @@ package {'nginx':
 }
 file_line {'http_header',
   path    => '/etc/nginx/nginx/conf',
-  line    => 'add_header X-Served-By $hostname;',
   match   => 'http {',
+  line    => "http {\n\tadd_header X-Served-By \"${hostname}\";",
   notify  => Exec['nginx_reload'],
 }
 
