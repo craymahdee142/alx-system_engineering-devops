@@ -14,6 +14,6 @@ file_line {'http_header',
   notify  => Exec['nginx_reload'],
 }
 
-exec { 'nginx_reload':
-  command => '/usr/sbin/service nginx reload',
+exec { 'run':
+  command => '/usr/sbin/service nginx restart',
 }
