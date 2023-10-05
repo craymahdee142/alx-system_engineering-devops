@@ -5,7 +5,11 @@ exec {'update':
 }
 
 package {'nginx':
+<<<<<<< HEAD
   ensure  => 'present', 
+=======
+  ensure  => 'present',
+>>>>>>> 55c27e7cbb5bc417f5bbb6159cf892875a72a085
 }
 file_line {'http_header',
   path    => '/etc/nginx/nginx/conf',
