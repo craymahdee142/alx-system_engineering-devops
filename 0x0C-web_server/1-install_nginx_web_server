@@ -2,7 +2,7 @@
 # install nginx server
 
 # update package info 
-apt-get -y update
+apt-get update
 
 # install Nginx
 apt-get -y install nginx

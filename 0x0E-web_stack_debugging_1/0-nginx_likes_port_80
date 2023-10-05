@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# A bash script to configure an Nginx server to listen to port 80
+# Remove default configuration of Nginx
+rm /etc/nginx/sites-enabled/default
+# configure to listen to port 80
+ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
+service nginx restart

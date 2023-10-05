@@ -5,19 +5,16 @@ exec {'update':
 }
 
 package {'nginx':
-<<<<<<< HEAD
   ensure  => 'present', 
-=======
   ensure  => 'present',
->>>>>>> 55c27e7cbb5bc417f5bbb6159cf892875a72a085
 }
 file_line {'http_header',
   path    => '/etc/nginx/nginx/conf',
-  line    => 'add_header X-Served-By $hostname;',
   match   => 'http {',
+  line    => "http {\n\tadd_header X-Served-By \"${hostname}\";",
   notify  => Exec['nginx_reload'],
 }
 
-exec { 'nginx_reload':
-  command => '/usr/sbin/service nginx reload',
+exec { 'run':
+  command => '/usr/sbin/service nginx restart',
 }
