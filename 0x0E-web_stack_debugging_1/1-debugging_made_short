@@ -5,4 +5,4 @@ ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
 #restart Nginx
 service nginx start
 # terminates first nginx process
-kill "$(pgrep 'nginx' | head -l)"
+kill "$(pgrep 'nginx' | head -n l)"
