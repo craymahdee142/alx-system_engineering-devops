@@ -16,4 +16,4 @@ echo "Hello world!" | sudo tee /var/www/html/index.html
 sudo nginx -t
 
 # start nginx service
-service nginx reload
+sudo service nginx restart
