@@ -1,21 +1,24 @@
 #!/usr/bin/env bash
 #Install and cofigure HAProxy on lb-01 to send traic to web-01 and web-02
-
+sudo apt-get update
 sudo apt-get install -y haproxy
 
-echo "ENABLED=1" | sudo tee -a /etc/default/haproxy
-cat <<EOT sudo tee -a /etc/haproxy/haproxy.cfg
+server_config=\
+"
 frontend craydee-frontend
-   timeout client 30000
-   bind 0:80
-   default_backend craydee_backend
+	timeout client 30000
+	bind 0.0.0.0:80
+	default_backend craydee_backend
 
 backend craydee_backend
-   timeout connect 3000
-   timeout server 30000
-   balance roundrobin
-   server 63210-web-01 54.210.48.100 check 
-   server 63210-web-02 54.210.47.110 check
-EOT
-
-sudo service haproxy start
+	timeout connect 3000
+	timeout server 30000
+	balance roundrobin
+	server 255535-web-01 54.157.147.218 check 
+	server 255535-web-02 3.85.41.177 check
+"
+echo "$serverconfig" | sudo tee -a /etc/haproxy/haproxy.cfg
+# enable init script to start haproxy
+echo "ENABLED=1" | sudo tee -a /etc/default/haproxy
+# restart HaProxy service
+sudo service haproxy restart
