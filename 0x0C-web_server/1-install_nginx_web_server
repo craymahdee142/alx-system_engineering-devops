@@ -12,8 +12,6 @@ sudo ufw allow 'Nginx HTTP'
 
 # sample text msg to defaulf Nginx page
 echo "Hello world!" | sudo tee /var/www/html/index.html
-# testing nginx configuration
-sudo nginx -t
 
 # start nginx service
 sudo service nginx start
