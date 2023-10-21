@@ -5,9 +5,9 @@ sudo apt-get -y upgrade
 sudo apt-get -y install nginx
 sudo service nginx start
 echo "Hello world!" | sudo tee /var/www/html/index.nginx-debian.html
-replace_str="server_name_;\n\n\trewrite \^\redirect_me https:\/\/www.google permanent;/"
-sudo sed -i "s/server_name_;\$/${replace_str}" /etc/nginx/sites-available/default
-sudo sed -i "s/^\t}$/\t\}\n\terror_page 404 \/404.html;/" /etc/nginx/sites-available/default
+replace_str="server_name_;\n\n\trewrite ^\/redirect_me https:\/\/www.google permanent;/"
+sudo sed -i "s/server_name_;/$replace_str/" /etc/nginx/sites-available/default
+sudo sed -i "s/^\t}$/\t}\n\terror_page 404 \/404.html;/" /etc/nginx/sites-available/default
 sudo ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
 echo "Ceci n'est pas une page" | sudo tee /var/www/html/404.html
 sudo service nginx restart
