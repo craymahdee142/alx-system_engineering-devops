@@ -2,7 +2,7 @@
 # update information and install nginx and star server
 sudo apt-get -y update
 sudo apt-get -y upgrade
-sudo apt-get -y install ngin
+sudo apt-get -y install nginx
 sudo service nginx start
 echo "Hello world!" | sudo tee /var/www/html/inde.nginx-debian.html
 replace_str="server_name_;\n\n\trewrite \^\redirect_me https:\/\/www.google permanent;/"
