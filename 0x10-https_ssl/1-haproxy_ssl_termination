@@ -40,6 +40,7 @@ frontend craydee-frontend
         default_backend craydee_backend
 
 backend craydee_backend
+	balance roundrobin
         redirect scheme https if ! { ssl_fc }
         server 255535-web-01 54.157.147.218
         server 255535-web-02 3.85.41.177
