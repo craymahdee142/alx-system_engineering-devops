@@ -2,8 +2,11 @@
 # A bash script that displays info about subdomain
 
 dns_config () {
-	script=$(dig "$2"."$1' | grep -A1 'ANSWER SELECTION:' | tr '\t' '\n' | tail -2 | '\n' ' ')
-	echo "$2 $script" | awk '{print "The subdomain " $1 " is  a " $2 " record and points to " $3}'
+	local domain="$1"
+	local subdomain="$2"
+	local script
+        script=$(dig "$2"."$1" | grep -A1 'ANSWER SECTION:' | tr '\t' '\n' | tail -2 | tr '\n' ' ')
+        echo "$2 $script" | awk '{print "The subdomain " $1 " is a " $2 " record and points to " $3}'
 }
 
 if [ "$#" == 1 ] 
@@ -14,5 +17,5 @@ then
 	dns_config "$1" "web-02"
 elif [ "$#" == 2 ] 
 then
-	dns_config "$1" "$2"
+        dns_config "$1" "$2"
 fi
