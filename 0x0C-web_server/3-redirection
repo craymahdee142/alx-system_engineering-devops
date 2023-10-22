@@ -4,6 +4,6 @@
 sudo apt-get -y  update
 sudo apt-get -y install nginx
 sudo ufw allow 'Nginx HTTP'
-echo "Hello world!" | sudo tee /var/www/html/index
+echo "Hello world!" | sudo tee /var/www/html/index.html
 sudo sed -i 'listen 80 default_server/a rewrite ^/rewrite  https://www.youtube.com/watch?v=QH2-TGUlwu4/ permanent;' /etc/nginx/sites-availble/default 
 service nginx restart
