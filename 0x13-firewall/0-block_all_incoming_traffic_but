@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+# Configure ufw firewall t block ncmng excet for TCP 80, 22, 443
+
+# install ufw if not already installed
+sudo apt install ufw
+
+# set default rules
+sudo ufw default deny incoming
+sudo ufw default allow outgoing
+
+# allowed ports
+sudo ufw allow 22/tcp
+sudo ufw allow 443/tcp
+sudo ufw allow 80/tcp
+
+# enable ufw
+sudo ufw enable
+
+# display the status o ufw in verbose mode
+sudo ufw status verbose
