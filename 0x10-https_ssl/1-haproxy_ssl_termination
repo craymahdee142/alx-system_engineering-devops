@@ -33,10 +33,16 @@ defaults
         errorfile 503 /etc/haproxy/errors/503.http
         errorfile 504 /etc/haproxy/errors/504.http
 
+frontend craydee-frontend
+        bind *:80
+        mode http
+	http-request set-header X-forward-Photo http
+        default_backend craydee_backend
 
 frontend craydee-frontend
         bind *:443 ssl crt /etc/letsencrypt/live/www.craydee.tech/www.craydee.tech.pem
-        mode http
+        mode https
+	http-request set-header X-forward-Photo https
         default_backend craydee_backend
 
 backend craydee_backend
