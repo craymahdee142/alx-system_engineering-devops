@@ -35,18 +35,13 @@ defaults
 
 frontend craydee-frontend
         bind *:80
-        mode http
-	http-request set-header X-forward-Photo http
-        default_backend craydee_backend
-
-frontend craydee-frontend
         bind *:443 ssl crt /etc/letsencrypt/live/www.craydee.tech/www.craydee.tech.pem
-        mode https
-	http-request set-header X-forward-Photo https
+        mode http
+        http-request set-header X-forward-Photo http if ! { ssl_fc }
+        http-request set-header X-forward-Photo https if ! { ssl_fc }
         default_backend craydee_backend
 
 backend craydee_backend
-	balance roundrobin
-        redirect scheme https if ! { ssl_fc }
+        balance roundrobin
         server 255535-web-01 54.157.147.218
         server 255535-web-02 3.85.41.177
