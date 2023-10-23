@@ -13,7 +13,9 @@ if __name__ == "__main__":
     tasks = req.get(url + "todos", params={"userId": employee_id}).json()
 
     # filter completed task
-    completed_tasks = [task["title"] for task in tasks if task["completed"]]
+    completed_tasks = [
+            task["title"] for task in tasks if task["completed"] is True
+    ]
     # extrack employee name and count
     employee_name = res.get("name")
     num_of_completed = len(completed_tasks)
