@@ -1,9 +1,9 @@
 #!/usr/bin/python3
 """Python script to export data in the JSON format"""
 
+import json
 import requests as req
 import sys
-import json
 
 
 if __name__ == '__main__':
