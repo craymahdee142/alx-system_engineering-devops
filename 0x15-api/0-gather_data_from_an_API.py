@@ -14,7 +14,7 @@ if __name__ == "__main__":
 
     # filter completed task
     completed_tasks = [
-            task["title"] for task in tasks if task["completed"] is True
+            t.get("title") for t in tasks if t.get("completed") is True
     ]
     # extrack employee name and count
     employee_name = res.get("name")
