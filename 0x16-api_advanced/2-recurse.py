@@ -1,16 +1,28 @@
 #!/usr/bin/python3
-"""Function to print hot posts"""
+"""
+Using reddit's API
+"""
 import requests as req
+after = None
 
 
-def def top_ten(subreddit):
-    """Print the tittles of hot post"""
-    url = "https://www.reddit.com/r/{}/hot/.json".format(subreddit)
-    headers = {"User-Agent": "Google Chrome Version 81.0.4044.129"}
-    params = {"limit": 10}
-    res = req.get(url, headers=headers, allow_redirects=False)
-    if res.status_code == 404:
-        print(""None)
-        return (0)
-    results = res.json().get("data")
-    [print(c.get("data").get("titles")) for c in results.get("children")]
+def recurse(subreddit, hot_list=[]):
+    """returne top ten post titles recursively"""
+    global after
+    user_agent = {'User-Agent': 'api_advanced-project'}
+    url = "https://www.reddit.com/r/{}/hot.json".format(subreddit)
+    parameters = {'after': after}
+    results = req.get(url, params=parameters, headers=user_agent,
+                      allow_redirects=False)
+
+    if results.status_code == 200:
+        after_data = results.json().get("data").get("after")
+        if after_data is not None:
+            after = after_data
+            recurse(subreddit, hot_list)
+        all_titles = results.json().get("data").get("children")
+        for title_ in all_titles:
+            hot_list.append(title_.get("data").get("title"))
+        return hot_list
+    else:
+        return (None)

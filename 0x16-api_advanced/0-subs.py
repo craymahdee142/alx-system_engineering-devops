@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""Function to query number of suvscribers"""
+"""Function to query number of subscribers"""
 import requests as req
 
 
