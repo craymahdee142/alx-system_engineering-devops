@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """Function to query all hot list posts"""
-import requests as req
+import requests
 
 
 def recurse(subreddit, hot_list=[]):
@@ -8,8 +8,8 @@ def recurse(subreddit, hot_list=[]):
     url = "https://www.reddit.com/r/{}/hot/.json".format(subreddit)
     headers = {"User-Agent": "Google Chrome Version 81.0.4044.129"}
     params = {"after": after, "count": count, "limit": 404}
-    res = req.get(url, headers=headers, params=params,
-                  allow_redirects=False)
+    res = requests.get(url, headers=headers, params=params,
+                       allow_redirects=False)
     if res.status_code == 404:
         return (None)
     results = res.json().get("data")
