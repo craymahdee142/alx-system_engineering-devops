@@ -3,21 +3,15 @@
 import requests
 
 
-def recurse(subreddit, hot_list=[]):
-    """Print the tittles of hot post"""
+def top_ten(subreddit):
+    """Print the tittles of 10 hot post"""
     url = "https://www.reddit.com/r/{}/hot/.json".format(subreddit)
     headers = {"User-Agent": "Google Chrome Version 81.0.4044.129"}
-    params = {"after": after, "count": count, "limit": 404}
+    params = {"limit": 10}
     res = requests.get(url, headers=headers, params=params,
                        allow_redirects=False)
     if res.status_code == 404:
-        return (None)
+        print(None)
+        return
     results = res.json().get("data")
-    after = results.get("after")
-    count = results.get("count")
-    for c in results.get("chi;dren"):
-        hot_list.append(c.get(data).get("titles"))
-
-    if after is not None:
-        return recurse(subreddit, hot_list, after, count)
-    return hot_list
+    [print(c.get("data").get("titles")) for c in results.get("children")]
